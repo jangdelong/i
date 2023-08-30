@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>前端散记 | Jelon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发" >
+    <meta name="description" content="Jelon个人前端小站" >
+
+    
+    <link rel="alternative" href="/blog/atom.xml" title="Jelon" type="application/atom+xml" >
+    
+    
+    <link rel="icon" href="/blog/favicon.ico" >
+    
+    
+<link rel="stylesheet" href="/blog/css/style.css?v=1693362479326.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="/blog/js/html5.js"></script>
+
+    <![endif]-->
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src="https://hm.baidu.com/hm.js?621362277ec5ebe4c7a45bf622457ba9"
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a target="_blank" rel="noopener" href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/blog/">
+                <div class="cover">
+                    <span class="name">JELON</span>
+                    <span class="description">个人博客小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/blog/posts/front-end-notes/index.html" class="item ">
+                <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/blog/posts/front-end-notes/index.html" class="item ">
+                <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
+            </li>
+            
+            <li rel="/blog/posts/front-end-notes/index.html" class="item ">
+                <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/blog/posts/front-end-notes/index.html" class="item ">
+                <a href="/blog/comment/" title="留言" class="iconfont icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/jangdelong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://cloud.tencent.com/document/product/583/56124" target="_blank">Hosted by Tencent Serverless</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="http://weibo.com/jangdelong" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href="https://v.douyin.com/Ae2KxPd/" class="qqweibo" target="_blank"><b>■</b> 抖音</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/blog/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/blog/img/jelon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>前端散记</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2018-09-02T00:00:00.000Z">2018-09-02</time>
+    </p>
+    <div id="JELON__articlePostContent" class="post-content">
+        <h3 id="前端事件流"><a href="#前端事件流" class="headerlink" title="前端事件流"></a>前端事件流</h3><p>事件流程如下：</p>
+<ol>
+<li><p>捕获阶段：事件从根元素开始向触发事件的目标元素进行传递，传递过程中，如果中间有元素注册了事件处理函数，并且 useCapture 参数值为 true ，那么此事件处理函数就会执行，IE9+和其他标准浏览器支持。</p>
+</li>
+<li><p>目标阶段：触发目标元素对应事件，并执行注册的事件处理函数。</p>
+</li>
+<li><p>冒泡阶段：从目标元素开始向根元素传递，传递过程中，如果中间有元素注册了事件处理函数，且 useCapture 值为 false，此事件处理函数就会执行。</p>
+</li>
+</ol>
+<h3 id="什么是闭包？这就是闭包！"><a href="#什么是闭包？这就是闭包！" class="headerlink" title="什么是闭包？这就是闭包！"></a>什么是闭包？这就是闭包！</h3><p>有权访问另一个函数作用域内变量的函数都是闭包。</p>
+<h3 id="HTTP缓存机制和原理"><a href="#HTTP缓存机制和原理" class="headerlink" title="HTTP缓存机制和原理"></a>HTTP缓存机制和原理</h3><ol>
+<li><p>强制缓存</p>
+<p> <img src="https://jangdelong.github.io/blog_img/images/front-end-notes/1.png" alt="https://jangdelong.github.io/blog_img/images/1.png"></p>
+<p> (1) Expires</p>
+<p> Expires 的值为服务端返回的到期时间，即下一次请求时，请求时间小于服务端返回的到期时间，直接使用缓存数据。</p>
+<p> 不过 Expires 是HTTP 1.0的东西，现在默认浏览器均默认使用 HTTP 1.1，所以它的作用基本忽略。</p>
+<p> 另一个问题是，到期时间是由服务端生成的，但是客户端时间可能跟服务端时间有误差，这就会导致缓存命中的误差。</p>
+<p> 所以HTTP 1.1 的版本，使用Cache-Control替代。</p>
+<p> (2) Cache-Control</p>
+<p> Cache-Control 是最重要的规则。常见的取值有 private、public、no-cache、max-age，no-store，默认为 private。</p>
+<ul>
+<li>private:             客户端可以缓存</li>
+<li>public:              客户端和代理服务器都可缓存（前端的同学，可以认为 public 和 private 是一样的）</li>
+<li>max-age=xxx:   缓存的内容将在 xxx 秒后失效</li>
+<li>no-cache:          需要使用对比缓存来验证缓存数据（后面介绍）</li>
+<li>no-store:           所有内容都不会缓存，强制缓存，对比缓存都不会触发（对于前端开发来说，缓存越多越好，so…基本上和它说886）</li>
+</ul>
+</li>
+<li><p>对比缓存</p>
+<p> <img src="https://jangdelong.github.io/blog_img/images/front-end-notes/2.png" alt="https://jangdelong.github.io/blog_img/images/2.png"></p>
+<p> (1) Last-Modified / If-Modified-Since</p>
+<ul>
+<li><p>Last-Modified：</p>
+<p>服务器在响应请求时，告诉浏览器资源的最后修改时间。</p>
+<p><img src="https://jangdelong.github.io/blog_img/images/front-end-notes/3.png" alt="https://jangdelong.github.io/blog_img/images/3.png"></p>
+</li>
+<li><p>If-Modified-Since：</p>
+<p>再次请求服务器时，通过此字段通知服务器上次请求时，服务器返回的资源最后修改时间。<br>服务器收到请求后发现有头 If-Modified-Since 则与被请求资源的最后修改时间进行比对。<br>若资源的最后修改时间大于 If-Modified-Since，说明资源又被改动过，则响应整片资源内容，返回状态码 200；</p>
+<p>若资源的最后修改时间小于或等于 If-Modified-Since，说明资源无新修改，则响应HTTP 304，告知浏览器继续使用所保存的cache。</p>
+<p><img src="https://jangdelong.github.io/blog_img/images/front-end-notes/4.png" alt="https://jangdelong.github.io/blog_img/images/4.png"></p>
+<p>(2) Etag / If-None-Match （优先级高于Last-Modified  /  If-Modified-Since）</p>
+</li>
+<li><p>Etag：</p>
+<p>服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识（生成规则由服务器决定）。</p>
+<p><img src="https://jangdelong.github.io/blog_img/images/front-end-notes/5.png" alt="https://jangdelong.github.io/blog_img/images/5.png"></p>
+</li>
+<li><p>If-None-Match：</p>
+<p>再次请求服务器时，通过此字段通知服务器客户段缓存数据的唯一标识。</p>
+<p>服务器收到请求后发现有头 If-None-Match 则与被请求资源的唯一标识进行比对，<br>不同，说明资源又被改动过，则响应整片资源内容，返回状态码 200；</p>
+<p>相同，说明资源无新修改，则响应 HTTP 304，告知浏览器继续使用所保存的 cache。</p>
+<p><img src="https://jangdelong.github.io/blog_img/images/front-end-notes/6.png" alt="https://jangdelong.github.io/blog_img/images/6.png"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="defer-和-async"><a href="#defer-和-async" class="headerlink" title="defer 和 async"></a>defer 和 async</h3><p>1、defer</p>
+<p>如果 script 标签设置了该属性，则浏览器会异步的下载该文件并且不会影响到后续 DOM 的渲染；</p>
+<p>如果有多个设置了 defer 的 script 标签存在，则会按照顺序执行所有的 script；</p>
+<p>defer 脚本会在文档渲染完毕后，DOMContentLoaded 事件调用前执行。</p>
+<p>2、async</p>
+<p>async 的设置，会使得 script 脚本异步的加载并在允许的情况下执行;<br>async 的执行，并不会按着 script 在页面中的顺序来执行，而是谁先加载完谁执行。</p>
+<h3 id="使用-js-的-FileReader对象实现上传图片时的图片预览功能"><a href="#使用-js-的-FileReader对象实现上传图片时的图片预览功能" class="headerlink" title="使用 js 的 FileReader对象实现上传图片时的图片预览功能"></a>使用 js 的 FileReader对象实现上传图片时的图片预览功能</h3><p>废话不多说线上代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span>  <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span>  <span class="attr">content</span>=<span class="string">&quot;width=device-width,initial-scale=1, user-scalable=no&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;format-detection&quot;</span> <span class="attr">content</span>=<span class="string">&quot;telephone=no&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">　  <span class="comment">// 选择图片时预览功能</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">imageshow</span>(<span class="params">source</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">	  <span class="keyword">var</span> file = source.files[<span class="number">0</span>];</span></span><br><span class="line"><span class="javascript">	    <span class="keyword">var</span> imageid = source.id;</span></span><br><span class="line"><span class="javascript">	    <span class="keyword">if</span> (<span class="built_in">window</span>.FileReader) &#123;</span></span><br><span class="line"><span class="javascript">	      <span class="keyword">var</span> fr = <span class="keyword">new</span> FileReader();</span></span><br><span class="line"><span class="javascript">	        fr.onloadend = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">document</span>.getElementById(<span class="string">&quot;portrait&quot;</span>+imageid).src = e.target.result;</span></span><br><span class="line">        &#125;;</span><br><span class="line">        fr.readAsDataURL(file);</span><br><span class="line">      &#125;</span><br><span class="line"><span class="javascript">　　　 <span class="built_in">document</span>.getElementById(<span class="string">&quot;image&quot;</span>+imageid).style.display=<span class="string">&quot;none&quot;</span>;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.getElementById(<span class="string">&quot;show&quot;</span>+imageid).style.display=<span class="string">&quot;block&quot;</span>;</span></span><br><span class="line">　　 &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;image1&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>上传截图<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;screenshot1&quot;</span> <span class="attr">id</span>=<span class="string">&quot;1&quot;</span> <span class="attr">onchange</span>=<span class="string">&quot;imageshow(this)&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">　<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;show1&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span>&gt;</span></span><br><span class="line">　  <span class="tag">&lt;<span class="name">img</span>  <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;portrait1&quot;</span> <span class="attr">width</span>=<span class="string">&quot;100&quot;</span> <span class="attr">height</span>=<span class="string">&quot;70&quot;</span>&gt;</span></span><br><span class="line">　<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">　<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;image2&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>上传截图<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;screenshot2&quot;</span> <span class="attr">id</span>=<span class="string">&quot;2&quot;</span> <span class="attr">onchange</span>=<span class="string">&quot;imageshow(this)&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">　<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;show2&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span>&gt;</span></span><br><span class="line">　  <span class="tag">&lt;<span class="name">img</span>  <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;portrait2&quot;</span> <span class="attr">width</span>=<span class="string">&quot;100&quot;</span> <span class="attr">height</span>=<span class="string">&quot;70&quot;</span>&gt;</span></span><br><span class="line">　<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;image3&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>上传截图<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;screenshot3&quot;</span> <span class="attr">id</span>=<span class="string">&quot;3&quot;</span> <span class="attr">onchange</span>=<span class="string">&quot;imageshow(this)&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;show3&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span>&gt;</span></span><br><span class="line">　  <span class="tag">&lt;<span class="name">img</span>  <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;portrait3&quot;</span> <span class="attr">width</span>=<span class="string">&quot;100&quot;</span> <span class="attr">height</span>=<span class="string">&quot;70&quot;</span> &gt;</span></span><br><span class="line">　<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="HTTPS-验证原理"><a href="#HTTPS-验证原理" class="headerlink" title="HTTPS 验证原理"></a>HTTPS 验证原理</h3><p>https 在真正请求数据前，先会与服务有几次握手验证，以证明相互的身份，以下图为例</p>
+<p><img src="https://jangdelong.github.io/blog_img/images/front-end-notes/7.png" alt="https://jangdelong.github.io/blog_img/images/front-end-notes/7.png"></p>
+<h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><ul>
+<li><p>减少请求数量（sprite、combo）</p>
+</li>
+<li><p>善用缓存（application cache、http缓存、CDN、localstorage、sessionstorage，备忘录模式）</p>
+</li>
+<li><p>减少选择器消耗（从右到左），减少DOM操作（DOM和JavaScript解释器的分离）</p>
+</li>
+<li><p>CSS的回流与重绘</p>
+<blockquote>
+<p>reflow(回流) </p>
+</blockquote>
+<p>  说到页面为什么会慢？那是因为浏览器要花时间、花精力去渲染，尤其是当它发现某个部分发生了点变化影响了布局，需要倒回去重新渲染， 该过程称为reflow（回流）。</p>
+<p>  reflow 几乎是无法避免的。现在界面上流行的一些效果，比如树状目录的折叠、展开（实质上是元素的显 示与隐藏）等，都将引起浏览器的 reflow。鼠标滑过、点击……只要这些行为引起了页面上某些元素的占位面积、定位方式、边距等属性的变化，都会引起它内部、周围甚至整个页面的重新渲 染。通常我们都无法预估浏览器到底会 reflow 哪一部分的代码，它们都彼此相互影响着。</p>
+<blockquote>
+<p>repaint(重绘)</p>
+</blockquote>
+<p>  如果只是改变某个元素的背景色、文 字颜色、边框颜色等等不影响它周围或内部布局的属性，将只会引起浏览器 repaint（重绘）。</p>
+<p>  repaint 的速度明显快于 reflow（在IE下需要换一下说法，reflow 要比 repaint 更缓慢）。</p>
+</li>
+</ul>
+<h3 id="对称加密及非对称加密"><a href="#对称加密及非对称加密" class="headerlink" title="对称加密及非对称加密"></a>对称加密及非对称加密</h3><ul>
+<li>对称加密</li>
+</ul>
+<p>发送方和接收方需要持有同一把密钥，发送消息和接收消息均使用该密钥。</p>
+<p>相对于非对称加密，对称加密具有更高的加解密速度，但双方都需要事先知道密钥，密钥在传输过程中可能会被窃取，因此安全性没有非对称加密高。</p>
+<ul>
+<li>非对称加密算法</li>
+</ul>
+<p>接收方在发送消息前需要事先生成公钥和私钥，然后将公钥发送给发送方。发送放收到公钥后，将待发送数据用公钥加密，发送给接收方。接收到收到数据后，用私钥解密。<br>在这个过程中，公钥负责加密，私钥负责解密，数据在传输过程中即使被截获，攻击者由于没有私钥，因此也无法破解。</p>
+<p>非对称加密算法的加解密速度低于对称加密算法，但是安全性更高。</p>
+<p>—- 以下更新于 2018-12-11 —-</p>
+<h3 id="link-和-import-区别"><a href="#link-和-import-区别" class="headerlink" title="link 和 @import 区别"></a>link 和 @import 区别</h3><ul>
+<li>从属关系区别</li>
+</ul>
+<p>@import是 CSS 提供的语法规则，只有导入样式表的作用；link是HTML提供的标签，不仅可以加载 CSS 文件，还可以定义 RSS、rel 连接属性等。</p>
+<ul>
+<li>加载顺序区别</li>
+</ul>
+<p>加载页面时，link标签引入的 CSS 被同时加载；@import引入的 CSS 将在页面加载完毕后被加载。</p>
+<ul>
+<li>兼容性区别</li>
+</ul>
+<p>@import是 CSS2.1 才有的语法，故只可在 IE5+ 才能识别；link标签作为 HTML 元素，不存在兼容性问题。</p>
+<ul>
+<li>DOM可控性区别</li>
+</ul>
+<p>可以通过 JS 操作 DOM ，插入link标签来改变样式；由于 DOM 方法是基于文档的，无法使用@import的方式插入样式。</p>
+<h3 id="CSS-权重优先级顺序"><a href="#CSS-权重优先级顺序" class="headerlink" title="CSS 权重优先级顺序"></a>CSS 权重优先级顺序</h3><p>!important &gt; 行内样式 &gt; ID &gt; 类、伪类、属性 &gt; 标签名 &gt; 继承 &gt; 通配符</p>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Pubsub */</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Pubsub</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="comment">//存放事件和对应的处理方法</span></span><br><span class="line">   <span class="built_in">this</span>.handles = &#123;&#125;;</span><br><span class="line"> &#125;</span><br><span class="line"> Pubsub.prototype = &#123;</span><br><span class="line">   <span class="comment">//传入事件类型type和事件处理handle</span></span><br><span class="line">   on: <span class="function"><span class="keyword">function</span> (<span class="params">type, handle</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(!<span class="built_in">this</span>.handles[type])&#123;</span><br><span class="line">       <span class="built_in">this</span>.handles[type] = [];</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="built_in">this</span>.handles[type].push(handle);</span><br><span class="line">   &#125;,</span><br><span class="line">   emit: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// 通过传入参数获取事件类型</span></span><br><span class="line">     <span class="keyword">var</span> type = <span class="built_in">Array</span>.prototype.shift.call(<span class="built_in">arguments</span>);</span><br><span class="line">     <span class="keyword">if</span> (!<span class="built_in">this</span>.handles[type]) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">this</span>.handles[type].length; i++) &#123;</span><br><span class="line">       <span class="keyword">var</span> handle = <span class="built_in">this</span>.handles[type][i];</span><br><span class="line">       <span class="comment">// 执行事件</span></span><br><span class="line">       handle.apply(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">   off: <span class="function"><span class="keyword">function</span> (<span class="params">type, handle</span>) </span>&#123;</span><br><span class="line">     handles = <span class="built_in">this</span>.handles[type];</span><br><span class="line">     <span class="keyword">if</span> (handles) &#123;</span><br><span class="line">       <span class="keyword">if</span> (!handle) &#123;</span><br><span class="line">         handles.length = <span class="number">0</span>; <span class="comment">// 清空数组</span></span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; handles.length; i++) &#123;</span><br><span class="line">           <span class="keyword">var</span> _handle = handles[i];</span><br><span class="line">           <span class="comment">// 有点问题</span></span><br><span class="line">           <span class="keyword">if</span> (_handle === handle) &#123;</span><br><span class="line">             handles.splice(i,<span class="number">1</span>);</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="两大数相加"><a href="#两大数相加" class="headerlink" title="两大数相加"></a>两大数相加</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumStrings</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> res = <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        c = <span class="number">0</span>;</span><br><span class="line">    a = a.split(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    b = b.split(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="keyword">while</span> (a.length || b.length || c) &#123;</span><br><span class="line">        c += ~~a.pop() + ~~b.pop(); <span class="comment">// ~~a字符串转数字 </span></span><br><span class="line">        res = c % <span class="number">10</span> + res;</span><br><span class="line">        c = c &gt; <span class="number">9</span>; <span class="comment">// 进1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.replace(<span class="regexp">/^0+/</span>,<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="设备像素比"><a href="#设备像素比" class="headerlink" title="设备像素比"></a>设备像素比</h3><p>物理像素(physical pixel)</p>
+<p>一个物理像素是显示器(手机屏幕)上最小的物理显示单元，在操作系统的调度下，每一个设备像素都有自己的颜色值和亮度值。</p>
+<p>设备独立像素(density-independent pixel)</p>
+<p>设备独立像素(也叫密度无关像素)，可以认为是计算机坐标系统中得一个点，这个点代表一个可以由程序使用的虚拟像素(比如: css像素)，然后由相关系统转换为物理像素。 所以说，物理像素和设备独立像素之间存在着一定的对应关系，这就是接下来要说的设备像素比。</p>
+<p>设备像素比(device pixel ratio )</p>
+<p>设备像素比(简称dpr)定义了物理像素和设备独立像素的对应关系，它的值可以按如下的公式的得到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设备像素比 = 物理像素 / 设备独立像素 // 在某一方向上，x方向或者y方向</span><br></pre></td></tr></table></figure>
+<p>—- 以下更新于 2018-12-13 —-</p>
+<h3 id="双向绑定原理（简单思路）"><a href="#双向绑定原理（简单思路）" class="headerlink" title="双向绑定原理（简单思路）"></a>双向绑定原理（简单思路）</h3><ol>
+<li><p>实现一个监听器Observer，用来劫持并监听所有属性，如果有变动的，就通知订阅者。</p>
+</li>
+<li><p>实现一个订阅者Watcher，每一个Watcher都绑定一个更新函数，watcher可以收到属性的变化通知并执行相应的函数，从而更新视图。</p>
+</li>
+<li><p>实现一个解析器Compile，可以扫描和解析每个节点的相关指令（v-model，v-on等指令），如果节点存在v-model，v-on等指令，则解析器Compile初始化这类节点的模板数据，使之可以显示在视图上，然后初始化相应的订阅者（Watcher）。</p>
+</li>
+</ol>
+<p>—- 以下更新于 2019-2-12 —-</p>
+<h3 id="面向对象的三个基本特征"><a href="#面向对象的三个基本特征" class="headerlink" title="面向对象的三个基本特征"></a>面向对象的三个基本特征</h3><ol>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ol>
+<p>—- 以下更新于 2019-2-24 —-</p>
+<h3 id="JS继承-·-类"><a href="#JS继承-·-类" class="headerlink" title="JS继承 · 类"></a>JS继承 · 类</h3><p>ES5 和 ES6 子类 <code>this</code> 生成顺序不同。ES5 的继承先生成了子类实例，再调用父类的构造函数修饰子类实例，ES6 的继承先生成父类实例，再调用子类的构造函数修饰父类实例。这个差别使得 ES6 可以继承内置对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyES5Array</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">Array</span>.call(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// it&#x27;s useless</span></span><br><span class="line"><span class="keyword">const</span> arrayES5 = <span class="keyword">new</span> MyES5Array(<span class="number">3</span>); <span class="comment">// arrayES5: MyES5Array &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyES6Array</span> <span class="keyword">extends</span> <span class="title">Array</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// it&#x27;s ok</span></span><br><span class="line"><span class="keyword">const</span> arrayES6 = <span class="keyword">new</span> MyES6Array(<span class="number">3</span>); <span class="comment">// arrayES6: MyES6Array(3) []</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ES5-ES6-的继承除了写法以外还有什么区别？"><a href="#ES5-ES6-的继承除了写法以外还有什么区别？" class="headerlink" title="ES5/ES6 的继承除了写法以外还有什么区别？"></a>ES5/ES6 的继承除了写法以外还有什么区别？</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://leanpub.com/understandinges6/read#leanpub-auto-class-declarations">来源：Understanding ECMAScript 6 </a></p>
+</blockquote>
+<p> 1、<code>class</code> 声明会提升，但不会初始化赋值。<code>Foo</code> 进入暂时性死区，类似于 <code>let</code>、<code>const</code> 声明变量。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bar = <span class="keyword">new</span> Bar(); <span class="comment">// it&#x27;s ok</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.bar = <span class="number">42</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo = <span class="keyword">new</span> Foo(); <span class="comment">// ReferenceError: Foo is not defined</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.foo = <span class="number">42</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 2、<code>class</code> 声明内部会启用严格模式。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用一个未声明的变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  baz = <span class="number">42</span>; <span class="comment">// it&#x27;s ok</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> bar = <span class="keyword">new</span> Bar();</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    fol = <span class="number">42</span>; <span class="comment">// ReferenceError: fol is not defined</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> foo = <span class="keyword">new</span> Foo();</span><br></pre></td></tr></table></figure>
+
+<p> 3、<code>class</code> 的所有方法（包括静态方法和实例方法）都是不可枚举的。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用一个未声明的变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.bar = <span class="number">42</span>;</span><br><span class="line">&#125;</span><br><span class="line">Bar.answer = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">42</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Bar.prototype.print = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.bar);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> barKeys = <span class="built_in">Object</span>.keys(Bar); <span class="comment">// [&#x27;answer&#x27;]</span></span><br><span class="line"><span class="keyword">const</span> barProtoKeys = <span class="built_in">Object</span>.keys(Bar.prototype); <span class="comment">// [&#x27;print&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.foo = <span class="number">42</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">answer</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">42</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">print</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.foo);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> fooKeys = <span class="built_in">Object</span>.keys(Foo); <span class="comment">// []</span></span><br><span class="line"><span class="keyword">const</span> fooProtoKeys = <span class="built_in">Object</span>.keys(Foo.prototype); <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+
+<p> 4、<code>class</code> 的所有方法（包括静态方法和实例方法）都没有原型对象 prototype，所以也没有<code>[[construct]]</code>，不能使用 <code>new</code> 来调用。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.bar = <span class="number">42</span>;</span><br><span class="line">&#125;</span><br><span class="line">Bar.prototype.print = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.bar);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = <span class="keyword">new</span> Bar();</span><br><span class="line"><span class="keyword">const</span> barPrint = <span class="keyword">new</span> bar.print(); <span class="comment">// it&#x27;s ok</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.foo = <span class="number">42</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">print</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.foo);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> foo = <span class="keyword">new</span> Foo();</span><br><span class="line"><span class="keyword">const</span> fooPrint = <span class="keyword">new</span> foo.print(); <span class="comment">// TypeError: foo.print is not a constructor</span></span><br></pre></td></tr></table></figure>
+
+<p> 5、必须使用 <code>new</code> 调用 <code>class</code>。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.bar = <span class="number">42</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> bar = Bar(); <span class="comment">// it&#x27;s ok</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.foo = <span class="number">42</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> foo = Foo(); <span class="comment">// TypeError: Class constructor Foo cannot be invoked without &#x27;new&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p> 6、<code>class</code> 内部无法重写类名。</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Bar = <span class="string">&#x27;Baz&#x27;</span>; <span class="comment">// it&#x27;s ok</span></span><br><span class="line">  <span class="built_in">this</span>.bar = <span class="number">42</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> bar = <span class="keyword">new</span> Bar();</span><br><span class="line"><span class="comment">// Bar: &#x27;Baz&#x27;</span></span><br><span class="line"><span class="comment">// bar: Bar &#123;bar: 42&#125;  </span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.foo = <span class="number">42</span>;</span><br><span class="line">    Foo = <span class="string">&#x27;Fol&#x27;</span>; <span class="comment">// TypeError: Assignment to constant variable</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> foo = <span class="keyword">new</span> Foo();</span><br><span class="line">Foo = <span class="string">&#x27;Fol&#x27;</span>; <span class="comment">// it&#x27;s ok</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Vue-组件的-data-必须是一个函数"><a href="#Vue-组件的-data-必须是一个函数" class="headerlink" title="Vue 组件的 data 必须是一个函数"></a>Vue 组件的 data 必须是一个函数</h3><p>一个组件的 <code>data</code> 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    count: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果 Vue 没有这条规则，点击某个按钮组件就可能影响到其它实例。</p>
+<h3 id="防抖及节流"><a href="#防抖及节流" class="headerlink" title="防抖及节流"></a>防抖及节流</h3><ol>
+<li><p>防抖</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 防抖函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">TODO:</span> 防止多次提交按钮，只执行最后提交的一次</span></span><br><span class="line"><span class="comment"> * 原理: 在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。</span></span><br><span class="line"><span class="comment"> * 适用场景: 按钮多次点击等</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> debounce = <span class="function">(<span class="params">fn, delay = <span class="number">500</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">    timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      fn.apply(<span class="built_in">this</span>, args)</span><br><span class="line">    &#125;, delay)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>节流</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 节流函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">TODO:</span> 固定时间内只执行一次，防止超高频次触发位置变动</span></span><br><span class="line"><span class="comment"> * 原理: 规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效。</span></span><br><span class="line"><span class="comment"> * 适用场景: 滚动事件等</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> throttle = <span class="function">(<span class="params">fn, delay = <span class="number">500</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!flag) <span class="keyword">return</span></span><br><span class="line">    flag = <span class="literal">false</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      fn.apply(<span class="built_in">this</span>, args)</span><br><span class="line">      flag = <span class="literal">true</span></span><br><span class="line">    &#125;, delay)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="更多内容，请移步↓"><a href="#更多内容，请移步↓" class="headerlink" title="更多内容，请移步↓"></a>更多内容，请移步↓</h4><p><a target="_blank" rel="noopener" href="https://github.com/front-end-pigs/blog/issues/4">https://github.com/front-end-pigs/blog/issues/4</a></p>
+</li>
+</ol>
+
+    </div>
+    <p class="eof">-- EOF --</p>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/blog/categories/Web%E6%8A%80%E6%9C%AF/">Web技术</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF/" title="前端">前端</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/blog/posts/eslintrc-js/">
+            
+                项目 eslint 配置 eslintrc.js
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/blog/posts/vue-next-tick/">
+            
+                Vue 源码分析之 nextTick
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  
+<script src="/blog/js/comment.js?v=1693362478895.js"></script>
+
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'front-end-notes' || 'posts/front-end-notes/',
+    owner: 'jangdelong',
+    repo: 'blog_comments',
+    clientId: 'b08ed25e52c57993e69c',
+    clientSecret: '1cb9545488f0380904b87350e7c5a270ae03bab7'
+  });
+  </script>
+
+
+
+            </div>
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/blog/categories/Web%E6%8A%80%E6%9C%AF/">Web技术</a>
+        <span class="badge">(35)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E7%94%9F%E6%B4%BB%E7%90%90%E4%BA%8B/">生活琐事</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/">算法练习</a>
+        <span class="badge">(31)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/blog/tags/%E7%AE%97%E6%B3%95/" title="算法">算法 (32)</a>
+  
+    <a class="tag-item" href="/blog/tags/LeetCode/" title="LeetCode">LeetCode (31)</a>
+  
+    <a class="tag-item" href="/blog/tags/Node-js/" title="Node.js">Node.js (5)</a>
+  
+    <a class="tag-item" href="/blog/tags/js/" title="js">js (4)</a>
+  
+    <a class="tag-item" href="/blog/tags/npm/" title="npm">npm (4)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF/" title="前端">前端 (3)</a>
+  
+    <a class="tag-item" href="/blog/tags/Hexo/" title="Hexo">Hexo (3)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/" title="静态博客">静态博客 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/" title="编码规范">编码规范 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/Mac-OSX/" title="Mac OSX">Mac OSX (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/Mac/" title="Mac">Mac (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/HTTPS/" title="HTTPS">HTTPS (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/css/" title="css">css (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/eslint/" title="eslint">eslint (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="文件上传">文件上传 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/content-type/" title="content-type">content-type (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/github-pages/" title="github pages">github pages (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Github/" title="Github">Github (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Git/" title="Git">Git (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/HTTP/" title="HTTP">HTTP (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E7%A0%81/" title="网络状态码">网络状态码 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%96%B0%E5%8D%9A%E5%AE%A2/" title="新博客">新博客 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/jQuery/" title="jQuery">jQuery (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%AB%98%E5%BA%A6/" title="浏览器高度">浏览器高度 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/js%E7%B1%BB%E5%9E%8B/" title="js类型">js类型 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/" title="隐式转换">隐式转换 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" title="命令大全">命令大全 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%BC%80%E6%9C%BA%E5%8F%98%E6%85%A2/" title="开机变慢">开机变慢 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Mongoose/" title="Mongoose">Mongoose (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81/" title="开源许可证">开源许可证 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/node/" title="node">node (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/react/" title="react">react (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/react-native/" title="react-native">react-native (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/iOS/" title="iOS">iOS (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/MySQL/" title="MySQL">MySQL (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" title="小程序">小程序 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/WeChat/" title="WeChat">WeChat (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%B7%98%E5%AE%9Dnpm/" title="淘宝npm">淘宝npm (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://github.com/front-end-pigs/blog" target="_blank" title="Github博客">Github博客</a>
+        </li>
+    
+        <li>
+            <a href="https://github.com/jangdelong/blog_comments/issues" target="_blank" title="本站所有评论">本站所有评论</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2014-2023
+    
+
+    <a href="/blog/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="/blog/js/main.js?v=1693362479327.js"></script>
+
+
+</body>
+</html>

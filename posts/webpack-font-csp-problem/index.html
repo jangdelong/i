@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>webpack打包eot、ttf、woff等字体文件问题 | Jelon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发" >
+    <meta name="description" content="Jelon个人前端小站" >
+
+    
+    <link rel="alternative" href="/blog/atom.xml" title="Jelon" type="application/atom+xml" >
+    
+    
+    <link rel="icon" href="/blog/favicon.ico" >
+    
+    
+<link rel="stylesheet" href="/blog/css/style.css?v=1693362479322.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="/blog/js/html5.js"></script>
+
+    <![endif]-->
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src="https://hm.baidu.com/hm.js?621362277ec5ebe4c7a45bf622457ba9"
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a target="_blank" rel="noopener" href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/blog/">
+                <div class="cover">
+                    <span class="name">JELON</span>
+                    <span class="description">个人博客小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/blog/posts/webpack-font-csp-problem/index.html" class="item ">
+                <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/blog/posts/webpack-font-csp-problem/index.html" class="item ">
+                <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
+            </li>
+            
+            <li rel="/blog/posts/webpack-font-csp-problem/index.html" class="item ">
+                <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/blog/posts/webpack-font-csp-problem/index.html" class="item ">
+                <a href="/blog/comment/" title="留言" class="iconfont icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/jangdelong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://cloud.tencent.com/document/product/583/56124" target="_blank">Hosted by Tencent Serverless</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="http://weibo.com/jangdelong" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href="https://v.douyin.com/Ae2KxPd/" class="qqweibo" target="_blank"><b>■</b> 抖音</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/blog/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/blog/img/jelon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>webpack打包eot、ttf、woff等字体文件问题</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2019-12-09T00:00:00.000Z">2019-12-09</time>
+    </p>
+    <div id="JELON__articlePostContent" class="post-content">
+        <blockquote>
+<p>最近因项目需要要将之前做的 npm 包的 css 样式，包括字体样式和字体文件（主要是使用了阿里的iconfont）打到js中，因为之前样式都是直接还是用外链的方式，要改掉，因此，花了一天的时间搞这个，碰到了些比较奇葩的事情，在此记录一下。</p>
+</blockquote>
+<h3 id="下载-iconfont-相关文件到本地"><a href="#下载-iconfont-相关文件到本地" class="headerlink" title="下载 iconfont 相关文件到本地"></a>下载 iconfont 相关文件到本地</h3><p><img src="https://user-images.githubusercontent.com/5547151/70047586-49f92880-1603-11ea-816e-4d84d663e7f4.png" alt="image"></p>
+<p>去掉了一些用不到的文件剩下如图所示文件，包括<code>iconfont.css</code>、<code>iconfont.eot</code>、<code>iconfont.svg</code>、<code>iconfont.ttf</code>、<code>iconfont.woff</code>、<code>iconfont.woff2</code>，iconfont.css是字体样式，其余的为字体文件：iconfont.woff2为主要目前流行的字体文件格式，兼容性最好，其他则是为了兼容不同浏览器及不同版本浏览器。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;<span class="attribute">font-family</span>: <span class="string">&quot;iconfont_sp&quot;</span>;</span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">&#x27;iconfont.eot?t=1575340034756&#x27;</span>); <span class="comment">/* IE9 */</span></span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">&#x27;iconfont.eot?t=1575340034756#iefix&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;embedded-opentype&#x27;</span>), /* IE6-IE8 */</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">&#x27;data:application/x-font-woff2;charset=utf-8;base64,此处为base64编码&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;woff2&#x27;</span>),</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">&#x27;iconfont.woff?t=1575340034756&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;woff&#x27;</span>),</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">&#x27;iconfont.ttf?t=1575340034756&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;truetype&#x27;</span>), /* chrome, firefox, opera, Safari, Android, iOS <span class="number">4.2</span>+ */</span><br><span class="line">  <span class="built_in">url</span>(<span class="string">&#x27;iconfont.svg?t=1575340034756#iconfont_sp&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;svg&#x27;</span>); <span class="comment">/* iOS 4.1- */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由此可见，阿里 iconfont+ 平台给我们生成的样式里面除了 woff2 打成了 DataUrl 即 转换成base64编码的字符串形式，并存储在 URL 中，冠以 mime-type，其他都都是之间都是直接使用文件路径。</p>
+<h3 id="改造-webpack-配置，将-css-打包进-js，最终输出-一个-umd-模块化的-npm-模块-js"><a href="#改造-webpack-配置，将-css-打包进-js，最终输出-一个-umd-模块化的-npm-模块-js" class="headerlink" title="改造 webpack 配置，将 css 打包进 js，最终输出 一个 umd 模块化的 npm 模块 js"></a>改造 webpack 配置，将 css 打包进 js，最终输出 一个 umd 模块化的 npm 模块 js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  devtool: <span class="string">&#x27;#source-map&#x27;</span>,</span><br><span class="line">  entry: [ <span class="string">&#x27;./src/index&#x27;</span> ],</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">&#x27;build&#x27;</span>),</span><br><span class="line">    filename: <span class="string">&#x27;selectPartner.js&#x27;</span>,</span><br><span class="line">    libraryTarget: <span class="string">&#x27;umd&#x27;</span>,</span><br><span class="line">    library: <span class="string">&#x27;selectPartner&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: [ <span class="string">&#x27;style-loader&#x27;</span>, <span class="string">&#x27;css-loader&#x27;</span>, <span class="string">&#x27;postcss-loader&#x27;</span> ],</span><br><span class="line">        include: path.resolve(__dirname, <span class="string">&#x27;src&#x27;</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(woff2?|eot|ttf|otf)(\?.*)?$/</span>,</span><br><span class="line">        loader: <span class="string">&#x27;url-loader&#x27;</span>,</span><br><span class="line">        options: &#123;</span><br><span class="line">          limit: <span class="number">20000</span>,</span><br><span class="line">          name: <span class="string">&#x27;fonts/[name]-[hash].[ext]&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(png|jpe?g|gif|svg)(\?.*)?$/</span>,</span><br><span class="line">        loader: <span class="string">&#x27;url-loader&#x27;</span>,</span><br><span class="line">        options: &#123;</span><br><span class="line">          limit: <span class="number">20000</span>,</span><br><span class="line">          name: <span class="string">&#x27;images/[name]-[hash].[ext]&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    extensions: [<span class="string">&#x27;.js&#x27;</span>, <span class="string">&#x27;.vue&#x27;</span>, <span class="string">&#x27;.json&#x27;</span>, <span class="string">&#x27;.html&#x27;</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用css-loader 处理 css 文件，使用 url-loader 对 css文件中引用的字体文件进行处理，将字体文件打包成 DataUrl 即 转换成base64编码的字符串形式，并存储在 URL 中，冠以 mime-type。当一切都准备好，打包也ok，确定代码逻辑啥的是没问题的。虽然打包成功，但是还是要测试一下，因为将最终打包出来的 umd 模块代码导入到项目代码中测试，测试结果如下图。</p>
+<p><img src="https://user-images.githubusercontent.com/5547151/70049883-b296d400-1608-11ea-82ce-5366af741030.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/5547151/70105660-756c2980-167c-11ea-92c8-3b33131f4c33.png" alt="image"></p>
+<p>icon图表并没有显示出来，审查一下元素查看对应样式代码，url 除了有一个 base64 是 iconfont+打包下来自带的 base64，其他的都是 <code>[object Module]</code>，这问题看起来很奇葩。</p>
+<h3 id="原因排查"><a href="#原因排查" class="headerlink" title="原因排查"></a>原因排查</h3><p>网上兜了一圈，找了挺久，终于在 stackoverflow 上找到类型的问题。</p>
+<p><img src="https://user-images.githubusercontent.com/5547151/70123341-6f427100-16ad-11ea-944d-506a4e0e1f5e.png" alt="image"></p>
+<p>大概的意思就是我打包出来的东西违反了 csp 相关内容，浏览器为了安全拒绝读取相应的DataUrl数据。</p>
+<p>什么是 csp，即内容安全策略( Content-Security-Policy )，是一个额外的安全层，用于检测并削弱某些特定类型的攻击，包括跨站脚本 (XSS) 和数据注入攻击等。无论是数据盗取、网站内容污染还是散发恶意软件，这些攻击都是主要的手段。具体就不展开细说。了解 csp 可参见 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP</a></p>
+<h3 id="疑问点及尝试解决方案"><a href="#疑问点及尝试解决方案" class="headerlink" title="疑问点及尝试解决方案"></a>疑问点及尝试解决方案</h3><p>其实最终我打包出来的js里面是有将 eot、ttf、woff等这些文件 DataUrl （base64）数据的，但是浏览器并没有执行。</p>
+<p><img src="https://user-images.githubusercontent.com/5547151/70125045-04933480-16b1-11ea-8fd1-451b35b6b41b.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/5547151/70125286-82574000-16b1-11ea-9732-8823a1116334.png" alt="image"></p>
+<p>综合发现，除了 woff2 的 DataUrl mineType 是 <code>application/x-font-woff2</code>，其他的都是 <code>font/woff</code> 这种方式。出于好奇，代码中把所有格式的字体 url 都去掉，只保留 <code>woff2</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@font-face</span> &#123;<span class="attribute">font-family</span>: <span class="string">&quot;iconfont_sp&quot;</span>;</span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">&#x27;data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAXAAAsAAAAAC3wAAAVwAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDeAqIVIcHATYCJAMoCxYABCAFhREHgQYbzwnIrrApw6/Q3XaiJEI0Mxiwx0nwjQviye6rXncP/woMj2AEMj0HoYTZk9Od/t30VSx1CzVJJ27QiaXJS6BIuJCKp5vDxICa2/7c/80Gzy2tBIfSjxJ84wF35VVS83I2ZGzwvcL+/59jqZcJlt/u2uX/615kYAVtYAPM59FFAxsWSBKMfSbi1Zucjsybx0MAnwzKkNZbdh0C5hgiv6DTZAmNA/NWAjOjFNywPbKtQTYBiqtWG84BG/OPly/UiDkoLE10ou5jN5NgXSANuZr//zJoHrzbywGMnUADZYABmTeaNxejsq4Mje/VGNMR4H+Gi0IFdlAT7PmY2xgQiPCcUZ5PHC0NCo3Bwsbx/vE8EJsoEAbuvHoPAokBBQGgIQAMBIAFAWBDoIcDQY0eAsEePVxoyE3gge2vHAdEgVSCnBfczh0FjUJAVJwWZhUuBXYUpvcbNcBKMI6u1fTzISSs5vvUYRRZpR7IDKepmsxBTSjx4KFtj1x5YPL9HT5dUPOZ68PRaPkqtYtIl+mq1xx78MG0BlcDm9+vXFPNVwVYVdRk1qb0hqSQpkU69R3eWajVuNL6nAqn4xxiEh8x9WFJ6hDEe95dhvWmYofYm4/oPqkvRR889LEqANFVuMi/FdlU1ueGarXO5fUgHoB0jGQuHgzW6w2icwtc1ujUTl0IcmCm5KYsbg0fDa2dLr7B7tzuZDuv1rYHb9XnGuQOBle2B2qr3fm8FNc3nBSjrebQHbULcmbB6NM7mLMwWl/p7KzlnQ79xw0BtglzuBHV2kdtxASFRoBtjLL3OQzPIwCX1XGjb/9NP2Gac1z315QQuoXeJmwzmryEodROXlQaTVxc9M7EpfR1dd3NOeL3LJv3xjwF3GXG91NT7luEacz4fs1OvbdU39oyR1GQEC1DhUEi4DQqbceOqrqq2h2dvozow9VU3IvYsT096sKUL3pZsiPr7bb7Vlrq2oKHaQRSvQ+A6Aaaq2Pbtnc0Eqbz/M//may0NJPE+wDRe0alWnHfut/d+uDQeaK1OY+Y1olHmZd6nVa0RU6eNNhSJDGbsMWg9TL2fE1n96HV42OYyZgFZm7LFxxRWxYIy+TusRM/XdNZ+9yNzsN9puadNn6e8sM4eCTQ4gascV6L4n771/oG+TmtNRS2iGInds8dDgpuGnKGHf9Q0DN8buDm6AyydOJDk5Ji/JAwpcRTdze9XOMF7dt0BWrLMq82s51+O0ufLou3+Q2Y6aub26ijXjULg+c0QOMG/V2n5nVr9S8d11b+0Gl16/VKnQ4EYQowqP0gsH/6ViGU+Kn/HOY+mX6fsl31z7U0ADwNfVJKWeMqA7aTcBkpR+Az7mSOML47SvrGHVzs+inVT8AIPjoxfBoHn/GiGF5uOxTP7ghCiPgaFA5ZoAlRyDTcGqbFbcK0ue3Bp5ReO4eIZQFGiPGAEjYLEBI4BooI7oAmgVdMw/3HsKRiybS5AvDpK0v3GaJAriIbWYhzkERjklAJwSgomeaQ4pWnVMoDkI6T4WyvZ6USQVYlmYzOx+aNNG6FCshubwNVPL2A4yiUYhk5ukWcDMpkDKpkmVhIcJiY45QroqIo/4kwgpEDhFawQHA4ICQoI0kCZQIEDAqoNMDdrj56v8kpVCg5AIQmDhk47PwARmxFQFhUSOYGpZoKqnjMrQEFt89jbDmLeGgWqEoOaqWxsDDIQWmLHIiM6hhQpo8vFQuEgANj/Bo1SlZQqYw1lhvAjiIkf/zdf65+ovP5okSLEUtsccQVT3wJYY2SMSpoKm+Os4TYlIVyJh6asBJazJkRYkhIIWlMMgkKizhF85JOkGBUSjFkYSTFsJExrISkoSmBKwgoAwAAAAA=&#x27;</span>) <span class="built_in">format</span>(<span class="string">&#x27;woff2&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.iconfont_sp</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;iconfont_sp&quot;</span> <span class="meta">!important</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">font-style</span>: normal;</span><br><span class="line">  -webkit-<span class="attribute">font</span>-smoothing: antialiased;</span><br><span class="line">  -moz-osx-<span class="attribute">font</span>-smoothing: grayscale;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.icon_sp-close</span>:before &#123;</span><br><span class="line">  content: <span class="string">&quot;\e632&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* ... */</span></span><br></pre></td></tr></table></figure>
+
+<p>试了一下，果真可以了，iconfont 字体显示出来。</p>
+<p><img src="https://user-images.githubusercontent.com/5547151/70125834-9cdde900-16b2-11ea-883d-74d968aaaa5f.png" alt="image"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过 url-loader 打报出来的 eot、ttf、woff 等文件打包出来的 DataUrl 对应 MIME Types 是有问题的，违反，stackoverflow 上找到了相关内容，<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/26177849/mime-types-for-woff-ttf-svg-and-eot-404ing-despite-being-setup-in-iis">https://stackoverflow.com/questions/26177849/mime-types-for-woff-ttf-svg-and-eot-404ing-despite-being-setup-in-iis</a>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">staticContent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">remove</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.woff&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mimeMap</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.woff&quot;</span> <span class="attr">mimeType</span>=<span class="string">&quot;application/font-woff&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">remove</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.ttf&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mimeMap</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.ttf&quot;</span> <span class="attr">mimeType</span>=<span class="string">&quot;application/font-ttf&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">remove</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.eot&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mimeMap</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.eot&quot;</span> <span class="attr">mimeType</span>=<span class="string">&quot;application/vnd.ms-fontobject&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">remove</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.otf&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mimeMap</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.otf&quot;</span> <span class="attr">mimeType</span>=<span class="string">&quot;application/font-otf&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">remove</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.svg&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mimeMap</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.svg&quot;</span> <span class="attr">mimeType</span>=<span class="string">&quot;image/svg+xml&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">staticContent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+    <p class="eof">-- EOF --</p>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/blog/categories/Web%E6%8A%80%E6%9C%AF/">Web技术</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/blog/tags/webpack/" title="webpack">webpack</a> / 
+    
+        <a href="/blog/tags/web-font/" title="web font">web font</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/blog/posts/leetcode-1013/">
+            
+                【每日一题】1013. 将数组分成和相等的三个部分
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/blog/posts/js-type-implicit/">
+            
+                js类型隐式转换坑点
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  
+<script src="/blog/js/comment.js?v=1693362478890.js"></script>
+
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: 'webpack-font-csp-problem' || 'posts/webpack-font-csp-problem/',
+    owner: 'jangdelong',
+    repo: 'blog_comments',
+    clientId: 'b08ed25e52c57993e69c',
+    clientSecret: '1cb9545488f0380904b87350e7c5a270ae03bab7'
+  });
+  </script>
+
+
+
+            </div>
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/blog/categories/Web%E6%8A%80%E6%9C%AF/">Web技术</a>
+        <span class="badge">(35)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E7%94%9F%E6%B4%BB%E7%90%90%E4%BA%8B/">生活琐事</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/">算法练习</a>
+        <span class="badge">(31)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/blog/tags/%E7%AE%97%E6%B3%95/" title="算法">算法 (32)</a>
+  
+    <a class="tag-item" href="/blog/tags/LeetCode/" title="LeetCode">LeetCode (31)</a>
+  
+    <a class="tag-item" href="/blog/tags/Node-js/" title="Node.js">Node.js (5)</a>
+  
+    <a class="tag-item" href="/blog/tags/js/" title="js">js (4)</a>
+  
+    <a class="tag-item" href="/blog/tags/npm/" title="npm">npm (4)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF/" title="前端">前端 (3)</a>
+  
+    <a class="tag-item" href="/blog/tags/Hexo/" title="Hexo">Hexo (3)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/" title="静态博客">静态博客 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/" title="编码规范">编码规范 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/Mac-OSX/" title="Mac OSX">Mac OSX (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/Mac/" title="Mac">Mac (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/HTTPS/" title="HTTPS">HTTPS (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/css/" title="css">css (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/eslint/" title="eslint">eslint (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="文件上传">文件上传 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/content-type/" title="content-type">content-type (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/github-pages/" title="github pages">github pages (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Github/" title="Github">Github (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Git/" title="Git">Git (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/HTTP/" title="HTTP">HTTP (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E7%A0%81/" title="网络状态码">网络状态码 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%96%B0%E5%8D%9A%E5%AE%A2/" title="新博客">新博客 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/jQuery/" title="jQuery">jQuery (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%AB%98%E5%BA%A6/" title="浏览器高度">浏览器高度 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/js%E7%B1%BB%E5%9E%8B/" title="js类型">js类型 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/" title="隐式转换">隐式转换 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" title="命令大全">命令大全 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%BC%80%E6%9C%BA%E5%8F%98%E6%85%A2/" title="开机变慢">开机变慢 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Mongoose/" title="Mongoose">Mongoose (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81/" title="开源许可证">开源许可证 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/node/" title="node">node (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/react/" title="react">react (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/react-native/" title="react-native">react-native (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/iOS/" title="iOS">iOS (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/MySQL/" title="MySQL">MySQL (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" title="小程序">小程序 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/WeChat/" title="WeChat">WeChat (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%B7%98%E5%AE%9Dnpm/" title="淘宝npm">淘宝npm (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://github.com/front-end-pigs/blog" target="_blank" title="Github博客">Github博客</a>
+        </li>
+    
+        <li>
+            <a href="https://github.com/jangdelong/blog_comments/issues" target="_blank" title="本站所有评论">本站所有评论</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2014-2023
+    
+
+    <a href="/blog/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="/blog/js/main.js?v=1693362479323.js"></script>
+
+
+</body>
+</html>

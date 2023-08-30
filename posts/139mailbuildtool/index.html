@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>139邮箱图形化前端构建小工具 | Jelon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发" >
+    <meta name="description" content="Jelon个人前端小站" >
+
+    
+    <link rel="alternative" href="/blog/atom.xml" title="Jelon" type="application/atom+xml" >
+    
+    
+    <link rel="icon" href="/blog/favicon.ico" >
+    
+    
+<link rel="stylesheet" href="/blog/css/style.css?v=1693362479339.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="/blog/js/html5.js"></script>
+
+    <![endif]-->
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src="https://hm.baidu.com/hm.js?621362277ec5ebe4c7a45bf622457ba9"
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a target="_blank" rel="noopener" href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/blog/">
+                <div class="cover">
+                    <span class="name">JELON</span>
+                    <span class="description">个人博客小站</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/blog/posts/139mailbuildtool/index.html" class="item ">
+                <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/blog/posts/139mailbuildtool/index.html" class="item ">
+                <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
+            </li>
+            
+            <li rel="/blog/posts/139mailbuildtool/index.html" class="item ">
+                <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/blog/posts/139mailbuildtool/index.html" class="item ">
+                <a href="/blog/comment/" title="留言" class="iconfont icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/jangdelong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://cloud.tencent.com/document/product/583/56124" target="_blank">Hosted by Tencent Serverless</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="http://weibo.com/jangdelong" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href="https://v.douyin.com/Ae2KxPd/" class="qqweibo" target="_blank"><b>■</b> 抖音</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/blog/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/blog/img/jelon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>139邮箱图形化前端构建小工具</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2016-12-19T00:00:00.000Z">2016-12-19</time>
+    </p>
+    <div id="JELON__articlePostContent" class="post-content">
+        <h3 id="背景目的"><a href="#背景目的" class="headerlink" title="背景目的"></a>背景目的</h3><p>自从139邮箱移动端酷版邮箱构建工具由原来的 ant 转移到 gulp 之后，构建速度大大的提升，就拿本人的机子（本人工作机子是32位6G内存）来测试，之前构建全量包要花费将近 20 分钟，如今只需要 4 分钟不到；另外 gulp 是基于 node.js 的，对前端开发来说是相当友好的。但是，还是有点美中不足：第一，比如像我这样的前端小白，我对命令行不是很敏感，甚至我不太喜欢敲一串串的命令行去执行一个任务，我希望能有一个图形化界面工具，能点点按钮什么的就可以完成一个构建任务，那该多爽。第二，目前的 gulp 构建还不支持自定义构建，这个自定义构建其实就是，比如说，我想打包某个目标文件（这个文件可能由好几个文件合并压缩而成），只要选择了这个文件的文件名，然后点击按钮，就可以帮你执行的任务，帮你构建好这个文件，甚至可以帮你部署到资源服务器上。</p>
+<p>简单的说就是：</p>
+<ul>
+<li>需要一个构建工具图形化界面</li>
+<li>需要自定义构建功能</li>
+</ul>
+<p>基于以上两个目的，所以就做了一个这样的图形化前端构建小工具。</p>
+<h3 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h3><ul>
+<li><p><strong>全量构建</strong></p>
+<p><img src="https://jangdelong.github.io/blog_img/images/139mailbuildtool/1.png" alt="全量构建效果图"></p>
+</li>
+<li><p><strong>JavaScript 增量构建</strong></p>
+</li>
+</ul>
+<p><img src="https://jangdelong.github.io/blog_img/images/139mailbuildtool/2.png" alt="全量构建效果图"></p>
+<ul>
+<li><strong>CSS 增量构建</strong></li>
+</ul>
+<p><img src="https://jangdelong.github.io/blog_img/images/139mailbuildtool/3.png" alt="全量构建效果图"></p>
+<ul>
+<li><strong>HTML 增量构建</strong></li>
+</ul>
+<p><img src="https://jangdelong.github.io/blog_img/images/139mailbuildtool/4.png" alt="全量构建效果图"></p>
+<h3 id="运用技术"><a href="#运用技术" class="headerlink" title="运用技术"></a>运用技术</h3><ul>
+<li><strong>基于现有的 gulp 构建</strong></li>
+</ul>
+<p><img src="https://jangdelong.github.io/blog_img/images/139mailbuildtool/5.png" alt="基于现有的 gulp 构建"></p>
+<p>目前的 gulp 构建通过命令行可执行独立任务任务有</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gulp  <span class="comment"># 构建全量包</span></span><br><span class="line">gulp deploy  <span class="comment"># 构建全量包并自动部署到资源服务器</span></span><br><span class="line">gulp uploadStaticFiles <span class="comment"># 部署静态资源到服务器</span></span><br><span class="line">gulp restartNodeServer <span class="comment"># 部署并重启测试线的 node 服务</span></span><br><span class="line">gulp watch <span class="comment"># 实时代码监听</span></span><br></pre></td></tr></table></figure>
+
+<p>说明：以上的命令除了部署并重启测试线的 node 服务之外，其他的任务都将加到本次的小工具上。</p>
+<ul>
+<li><strong>Electron</strong> </li>
+</ul>
+<p>最重要的东西要来了，它就是 Electron。在这之前，大家应该都有听说过 Node-Webkit （后期改名 NW.js）。NW.js 允许您直接从 DOM 层调用所有 Node.js 模块，并允许使用所有Web技术编写 PC 端的应用程序。而 Electron 也差不多类似这样的一种工具或者说框架。</p>
+<p>Electron 是允许使用 JavaScript，HTML 和 CSS 等 Web 技术创建 PC 应用程序的框架。 它负责跟系统打交道，使得开发者可以更加专注于应用本身。Electron 官网 <a target="_blank" rel="noopener" href="http://electron.atom.io/">http://electron.atom.io/</a> 。</p>
+<p>Electron 的主要特点有：</p>
+<ol>
+<li><p><em>Web 技术。</em> Electron 是基于 Chromium 和 Node.js，因此您可以使用HTML，CSS和JavaScript构建应用程序。</p>
+</li>
+<li><p><em>开源。</em> Electron是由GitHub和活跃的贡献者社区维护的开源项目。</p>
+</li>
+<li><p><em>跨平台。</em> 兼容 Mac，Windows 和 Linux 系统，Electron 应用程序可在三个平台上构建和运行。</p>
+</li>
+</ol>
+<p>Electron 快速入手：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Clone the Quick Start repository</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/electron/electron-quick-start</span><br><span class="line"></span><br><span class="line"><span class="comment"># Go into the repository</span></span><br><span class="line">$ <span class="built_in">cd</span> electron-quick-start</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install the dependencies and run</span></span><br><span class="line">$ npm install &amp;&amp; npm start</span><br></pre></td></tr></table></figure>
+
+<p>我为什么要用 Electron 而不用 NW.js ？</p>
+<ol>
+<li><p>好奇心的我，想接触一下新事物；</p>
+</li>
+<li><p>剩下的理由主要是受了知乎一些吐槽的影响。《<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/38854224?sort=created">用Nodejs开发桌面应用。NW.js 和 Electron 各有什么优缺点，你选择哪个？</a>》 </p>
+</li>
+</ol>
+<p>有哪些公司或者 App 在用 Electron？</p>
+<p>其实，Electron 已经被微软，Facebook，Slack 和 Docker 等公司用来创建应用程序。成功案例有很多，比较有代表性的有如下这些：</p>
+<ol>
+<li><p>Atom 编辑器</p>
+</li>
+<li><p>Slack（那个独角兽公司）</p>
+</li>
+<li><p>Visual Studio Code</p>
+</li>
+<li><p>WordPress 桌面版</p>
+</li>
+</ol>
+<ul>
+<li><strong>Bootstrap</strong></li>
+</ul>
+<p>UI 界面用的是 Bootstrap，简洁、直观、强悍的前端开发框架，让web开发更迅速、简单。</p>
+<ul>
+<li><strong>Q.js</strong></li>
+</ul>
+<p>由于本图形构建工具功能比较简单，所以想做一个单页面就好，但是又不想用像 vue 这样的框架，网上找了一下，发现 Q.js 这个路由框架。</p>
+<p>Q.js 是一个炒鸡轻量的前端单页路由框架。官网地址是 <a target="_blank" rel="noopener" href="http://mouto.org/#!54092">http://mouto.org/#!54092</a>，Github 地址是 <a target="_blank" rel="noopener" href="https://github.com/itorr/q.js">https://github.com/itorr/q.js</a>。</p>
+<p>Q.js 特点是轻量、快速、极简。为了更好的利用缓存以及更少的后端支援，Q.js放弃了 HTML5 State，通过#!格式的 url hach 重现了 url 路由功能。</p>
+<ol>
+<li><p>无 JavaScript 库依托，可随意搭配使用；</p>
+</li>
+<li><p>源代码不及百行压缩后 834byte ；</p>
+</li>
+<li><p>支持 IE6+ Chrome Safari FF （其实 Electron 算是很新的浏览器内核，已经没必要考虑这一点）；</p>
+</li>
+<li><p>未做情况判定，使用 Q.js 必然会注册 window.Q 。</p>
+</li>
+</ol>
+<p>来一段简单的 <code>Hello, World</code> 来简单演示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>演示<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;a.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;m&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	Q.reg(<span class="string">&#x27;home&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">	  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;m&#x27;</span>).innerHTML = <span class="string">&#x27;Hello, World!&#x27;</span>;</span></span><br><span class="line">	&#125;);</span><br><span class="line">	Q.init(&#123;</span><br><span class="line"><span class="javascript">	  index: <span class="string">&#x27;home&#x27;</span> <span class="comment">/* 首页地址 */</span></span></span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>打开例子后，浏览器会从 <code>http://simple.com/</code> 跳转到 <code>http://simple.com/#!home</code> ，并且在页面显示 Hello World。</p>
+<h3 id="技术实现"><a href="#技术实现" class="headerlink" title="技术实现"></a>技术实现</h3><p>首先，我们整体看一下，整个应用的目录结构：</p>
+<p><img src="https://jangdelong.github.io/blog_img/images/139mailbuildtool/6.png" alt="项目结构"></p>
+<p>在执行 gulp 各个任务，主要用了 node.js 的 child_process 进程模块的 spawn 方法。<code>spawn</code> 使用如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> spawn    = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>).spawn;</span><br><span class="line"><span class="keyword">const</span> gulpTask = spawn(<span class="string">&#x27;gulp&#x27;</span>, [ <span class="string">&#x27;default&#x27;</span> ]);</span><br></pre></td></tr></table></figure>
+
+<p>对自定义构建，主要通过命令行传参的方式指定的 gulp 构建的 json 配置，从而实现文件的自定义构建，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前端获取选择的配置文件的文件名并以`,`号分隔</span></span><br><span class="line"><span class="comment">// 如 --fileConf=/Users/zdl/Documents/Projects/Mail139_iPad_F2010/trunk/src/buildNew/config/jsFiles/concat/calendar_birthday.html.pack.js.json,/Users/zdl/Documents/Projects/Mail139_iPad_F2010/trunk/src/buildNew/config/jsFiles/concat/calendar_calendar.html.pack.js.json</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> yargv = <span class="built_in">require</span>(<span class="string">&#x27;yargs&#x27;</span>).argv;</span><br><span class="line"><span class="keyword">var</span> fileConf = yargv.fileConf;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>全量构建</strong></li>
+</ul>
+<p>全量构建里面包含“构建全量包”、“构建并部署”、“构建并监听”三个任务。实现代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//-- renders.js --</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构建全量包</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description  </span>gulp default</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">$E(<span class="string">&#x27;btnBuildGlobal&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  executeBuild(&#123;</span><br><span class="line">    processingBarId: <span class="string">&#x27;btnBuildGlobalProgress&#x27;</span>,</span><br><span class="line">    processingName: <span class="string">&#x27;构建全量包&#x27;</span>,</span><br><span class="line">    command: <span class="string">&#x27;gulp&#x27;</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构建并部署</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@deacription </span>gulp deploy</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">$E(<span class="string">&#x27;btnBuildDeploy&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  executeBuild(&#123;</span><br><span class="line">    processingBarId: <span class="string">&#x27;btnBuildDeployProgress&#x27;</span>,</span><br><span class="line">    processingName: <span class="string">&#x27;构建并部署&#x27;</span>,</span><br><span class="line">    command: <span class="string">&#x27;gulp&#x27;</span>,</span><br><span class="line">    args: [ <span class="string">&#x27;deploy&#x27;</span> ]</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构建并监听</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description  </span>gulp watch</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">$E(<span class="string">&#x27;btnBuildWatch&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _this = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (_this.dataset.watching === <span class="string">&#x27;off&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (processingObject.processingGulp) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 关闭其他线程的提示框</span></span><br><span class="line">    closeTips();</span><br><span class="line">    </span><br><span class="line">    processingObject.processingGulp = spawn(<span class="string">&#x27;gulp&#x27;</span>, [ <span class="string">&#x27;watch&#x27;</span> ], &#123;</span><br><span class="line">      cwd: config[$E(<span class="string">&#x27;btnSwitchRDlines&#x27;</span>).dataset[<span class="string">&#x27;switch&#x27;</span>]]</span><br><span class="line">    &#125;);</span><br><span class="line">    processingObject.processingName = <span class="string">&#x27;构建并监听&#x27;</span>;</span><br><span class="line">    processingObject.processingBarId = <span class="string">&#x27;btnBuildWatchProgress&#x27;</span>;</span><br><span class="line">    _this.innerHTML = <span class="string">&#x27;点击不监听&#x27;</span>;</span><br><span class="line">    _this.dataset.watching = <span class="string">&#x27;on&#x27;</span>;</span><br><span class="line">    $E(<span class="string">&#x27;btnBuildWatchProgress&#x27;</span>).style.width = <span class="string">&#x27;100%&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    processingObject.processingGulp.stdout.on(<span class="string">&#x27;data&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`stdout: <span class="subst">$&#123;data&#125;</span>`</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    processingObject.processingGulp.on(<span class="string">&#x27;close&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`stdout close: <span class="subst">$&#123;data&#125;</span>`</span>);</span><br><span class="line">      <span class="keyword">if</span> (data === <span class="literal">null</span>) &#123;</span><br><span class="line">        _this.innerHTML = <span class="string">&#x27;构建并监听&#x27;</span>;</span><br><span class="line">        _this.dataset.watching = <span class="string">&#x27;off&#x27;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_this.dataset.watching === <span class="string">&#x27;on&#x27;</span>) &#123;</span><br><span class="line">    _this.innerHTML = <span class="string">&#x27;构建并监听&#x27;</span>;</span><br><span class="line">    _this.dataset.watching = <span class="string">&#x27;off&#x27;</span>;</span><br><span class="line">    $E(<span class="string">&#x27;btnBuildWatchProgress&#x27;</span>).style.width = <span class="string">&#x27;0%&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    showTips(<span class="string">&#x27;代码监听已取消！&#x27;</span>, <span class="string">&#x27;alert-danger&#x27;</span>);</span><br><span class="line">    killCurrentProcessing();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>JavaScript 自定义构建</strong></li>
+</ul>
+<p>JavaScript 自定义构建包含“打包”、“打包并部署”两个任务，实现代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//-- renders.js --</span></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 自定义构建JS</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description </span>gulp customBuildJs --fileConf</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  $E(<span class="string">&#x27;btnBuildJS&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oCheckeds = $E(<span class="string">&#x27;jsBuildContainerContent&#x27;</span>).querySelectorAll(<span class="string">&#x27;input[type=&quot;checkbox&quot;]:checked&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;oCheckeds =&gt;&#x27;</span>, oCheckeds);</span><br><span class="line">    <span class="keyword">if</span> (!oCheckeds.length) &#123;</span><br><span class="line">      alert(<span class="string">&#x27;请选择要打包的 js 文件！&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> fileConf = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = oCheckeds.length; i &lt; len; ++i) &#123;</span><br><span class="line">      fileConf.push(oCheckeds[i].value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;fileConf =&gt;&#x27;</span>, fileConf.join(<span class="string">&#x27;,&#x27;</span>));</span><br><span class="line">    executeBuild(&#123;</span><br><span class="line">      processingBarId: <span class="string">&#x27;btnBuildProgressJS&#x27;</span>,</span><br><span class="line">      processingName: <span class="string">&#x27;JS文件自定义构建&#x27;</span>,</span><br><span class="line">      command: <span class="string">&#x27;gulp&#x27;</span>,</span><br><span class="line">      args: [ <span class="string">&#x27;customBuildJs&#x27;</span>, <span class="string">&#x27;--fileConf=&#x27;</span> + fileConf.join(<span class="string">&#x27;,&#x27;</span>) ]</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 自定义构建并自动部署JS</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description </span>gulp customBuildAndDeployJs --fileConf</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  $E(<span class="string">&#x27;btnBuildDeployJS&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oCheckeds = $E(<span class="string">&#x27;jsBuildContainerContent&#x27;</span>).querySelectorAll(<span class="string">&#x27;input[type=&quot;checkbox&quot;]:checked&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;oCheckeds =&gt;&#x27;</span>, oCheckeds);</span><br><span class="line">    <span class="keyword">if</span> (!oCheckeds.length) &#123;</span><br><span class="line">      alert(<span class="string">&#x27;请选择要打包部署的 js 文件&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> fileConf = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = oCheckeds.length; i &lt; len; ++i) &#123;</span><br><span class="line">      fileConf.push(oCheckeds[i].value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;fileConf =&gt;&#x27;</span>, fileConf.join(<span class="string">&#x27;,&#x27;</span>));</span><br><span class="line">    executeBuild(&#123;</span><br><span class="line">      processingBarId: <span class="string">&#x27;btnBuildProgressJS&#x27;</span>,</span><br><span class="line">      processingName: <span class="string">&#x27;JS文件自定义构建并自动部署&#x27;</span>,</span><br><span class="line">      command: <span class="string">&#x27;gulp&#x27;</span>,</span><br><span class="line">      args: [ <span class="string">&#x27;customBuildAndDeployJs&#x27;</span>, <span class="string">&#x27;--fileConf=&#x27;</span> + fileConf.join(<span class="string">&#x27;,&#x27;</span>) ]</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//-- gulpfile.js --</span></span><br><span class="line">  <span class="comment">// 自定义构建打包 js </span></span><br><span class="line"><span class="comment">// 参考：task uglifyJs</span></span><br><span class="line">gulp.task(<span class="string">&#x27;customBuildJs&#x27;</span>, [ <span class="string">&#x27;clean&#x27;</span>, <span class="string">&#x27;compileTsFiles&#x27;</span>, <span class="string">&#x27;updateJsConcatConfig&#x27;</span> ], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`yargv.fileConf =&gt; <span class="subst">$&#123;yargv.fileConf&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">var</span> fileConf = yargv.fileConf;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pump([</span><br><span class="line">        concatJsFiles(&#123;</span><br><span class="line">            concatConfig: fileConf.split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">         &#125;),</span><br><span class="line">        debug(&#123;<span class="attr">title</span>: <span class="string">&quot;concating --&gt; &quot;</span>&#125;),</span><br><span class="line">        <span class="comment">// sourcemaps.init(),</span></span><br><span class="line">        uglify(),</span><br><span class="line">        debug(&#123;<span class="attr">title</span>: <span class="string">&quot;uglifying --&gt; &quot;</span>&#125;),</span><br><span class="line">        <span class="comment">// sourcemaps.write(&quot;./&quot;),</span></span><br><span class="line">        gulp.dest( path.join(destDir))</span><br><span class="line">    ]);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 自定义构建打包并部署 js</span></span><br><span class="line">gulp.task(<span class="string">&#x27;customBuildAndDeployJs&#x27;</span>, [ <span class="string">&#x27;customBuildJs&#x27;</span> ], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> conn = ftp.create( &#123;</span><br><span class="line">        host:     <span class="string">&#x27;此处是host ip&#x27;</span>,</span><br><span class="line">        user:     <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        password: <span class="string">&#x27;此处是密码&#x27;</span>,</span><br><span class="line">        parallel: <span class="number">10</span>,</span><br><span class="line">        log:      gutil.log</span><br><span class="line">        <span class="comment">// debug: gutil.log</span></span><br><span class="line">    &#125; );</span><br><span class="line"></span><br><span class="line">    gutil.log(<span class="string">&quot;----------**********-----------&quot;</span>);</span><br><span class="line">    gutil.log(gutil.colors.magenta(<span class="string">&quot;---------上传静态资源文件--------&quot;</span>));</span><br><span class="line">    gutil.log(<span class="string">&quot;----------**********-----------&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// gulp-ssh插件在上传文件数量过多时会报错，所以使用vinyl-ftp替代,效率更高</span></span><br><span class="line">    <span class="comment">// turn off buffering in gulp.src for best performance</span></span><br><span class="line">    <span class="keyword">return</span> gulp.src( path.join( resourceDir, <span class="string">&quot;**/*&quot;</span>), &#123; <span class="attr">buffer</span>: <span class="literal">false</span> &#125; )</span><br><span class="line">        .pipe( conn.dest(<span class="string">&#x27;/home/richmail/nginx/htdocs/html5&#x27;</span>) );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>对于 JavaScript 自定义构建，在 gulpfile.js 里面新加了 customBuildJs、customBuildAndDeployJs 两个 task。</p>
+<ul>
+<li><strong>CSS 自定义构建</strong></li>
+</ul>
+<p>CSS 自定义构建包含“打包”、“打包并部署”两个任务，实现代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//-- renders.js --</span></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 自定义构建CSS</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description </span>gulp customBuildCss --fileConf</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  $E(<span class="string">&#x27;btnBuildCSS&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oCheckeds = $E(<span class="string">&#x27;cssBuildContainerContent&#x27;</span>).querySelectorAll(<span class="string">&#x27;input[type=&quot;checkbox&quot;]:checked&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;oCheckeds =&gt;&#x27;</span>, oCheckeds);</span><br><span class="line">    <span class="keyword">if</span> (!oCheckeds.length) &#123;</span><br><span class="line">      alert(<span class="string">&#x27;请选择要打包的 css 文件配置&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> fileConf = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = oCheckeds.length; i &lt; len; ++i) &#123;</span><br><span class="line">      fileConf.push(oCheckeds[i].value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;fileConf =&gt;&#x27;</span>, fileConf.join(<span class="string">&#x27;,&#x27;</span>));</span><br><span class="line">    executeBuild(&#123;</span><br><span class="line">      processingBarId: <span class="string">&#x27;btnBuildProgressCSS&#x27;</span>,</span><br><span class="line">      processingName: <span class="string">&#x27;CSS文件自定义构建&#x27;</span>,</span><br><span class="line">      command: <span class="string">&#x27;gulp&#x27;</span>,</span><br><span class="line">      args: [ <span class="string">&#x27;customBuildCss&#x27;</span>, <span class="string">&#x27;--fileConf=&#x27;</span> + fileConf.join(<span class="string">&#x27;,&#x27;</span>) ]</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 自定义构建并自动部署CSS</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description </span>gulp customBuildAndDeployCss --fileConf</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  $E(<span class="string">&#x27;btnBuildDeployCSS&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oCheckeds = $E(<span class="string">&#x27;cssBuildContainerContent&#x27;</span>).querySelectorAll(<span class="string">&#x27;input[type=&quot;checkbox&quot;]:checked&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;oCheckeds =&gt;&#x27;</span>, oCheckeds);</span><br><span class="line">    <span class="keyword">if</span> (!oCheckeds.length) &#123;</span><br><span class="line">      alert(<span class="string">&#x27;请选择要打包的 css 文件配置&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> fileConf = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = oCheckeds.length; i &lt; len; ++i) &#123;</span><br><span class="line">      fileConf.push(oCheckeds[i].value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;fileConf =&gt;&#x27;</span>, fileConf.join(<span class="string">&#x27;,&#x27;</span>));</span><br><span class="line">    executeBuild(&#123;</span><br><span class="line">      processingBarId: <span class="string">&#x27;btnBuildProgressCSS&#x27;</span>,</span><br><span class="line">      processingName: <span class="string">&#x27;CSS文件自定义构建并自动部署&#x27;</span>,</span><br><span class="line">      command: <span class="string">&#x27;gulp&#x27;</span>,</span><br><span class="line">      args: [ <span class="string">&#x27;customBuildAndDeployCss&#x27;</span>, <span class="string">&#x27;--fileConf=&#x27;</span> + fileConf.join(<span class="string">&#x27;,&#x27;</span>) ]</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//-- gulpfile.js --</span></span><br><span class="line"><span class="comment">// 自定义构建 css</span></span><br><span class="line"><span class="comment">// 参考 task compressCss</span></span><br><span class="line">gulp.task(<span class="string">&#x27;customBuildCss&#x27;</span>, [ <span class="string">&#x27;clean&#x27;</span> ], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`yargv.fileConf =&gt; <span class="subst">$&#123;yargv.fileConf&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">var</span> fileConf = yargv.fileConf;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 压缩css文件</span></span><br><span class="line">    <span class="comment">// return concatCssFiles(&#123;concatConfig: &#x27;./config/cssFiles/concatcss.json&#x27;&#125;)</span></span><br><span class="line">    <span class="keyword">return</span> concatCssFiles(&#123; <span class="attr">concatConfig</span>: fileConf &#125;)</span><br><span class="line">        .pipe(debug(&#123;<span class="attr">title</span>: <span class="string">&#x27;concating css file --&gt; &#x27;</span>&#125;))</span><br><span class="line">        .pipe(replaceImageVersion(&#123;</span><br><span class="line">            rootDir: html5Dir, </span><br><span class="line">            images: path.join(html5Dir, <span class="string">&#x27;/**/*.&#123;png,gif,jpg,ico&#125;&#x27;</span>)                    </span><br><span class="line">        &#125;))</span><br><span class="line">        .pipe(debug(&#123;<span class="attr">title</span>: <span class="string">&#x27;img url reversion file --&gt; &#x27;</span>&#125;))        </span><br><span class="line">        .pipe(minifyCss(&#123;<span class="attr">processImport</span>: <span class="literal">false</span>&#125;))</span><br><span class="line">        .pipe(debug(&#123;<span class="attr">title</span>: <span class="string">&#x27;compress css file --&gt; &#x27;</span>&#125;))</span><br><span class="line">        .pipe(gulp.dest(path.join(resourceDir, <span class="string">&#x27;css&#x27;</span>)));</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 自定义构建并部署 css</span></span><br><span class="line">gulp.task(<span class="string">&#x27;customBuildAndDeployCss&#x27;</span>, [ <span class="string">&#x27;customBuildCss&#x27;</span> ], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> conn = ftp.create( &#123;</span><br><span class="line">        host:     <span class="string">&#x27;此处是host ip&#x27;</span>,</span><br><span class="line">        user:     <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        password: <span class="string">&#x27;此处是密码&#x27;</span>,</span><br><span class="line">        parallel: <span class="number">10</span>,</span><br><span class="line">        log:      gutil.log</span><br><span class="line">        <span class="comment">// debug: gutil.log</span></span><br><span class="line">    &#125; );</span><br><span class="line"></span><br><span class="line">    gutil.log(<span class="string">&quot;----------**********-----------&quot;</span>);</span><br><span class="line">    gutil.log(gutil.colors.magenta(<span class="string">&quot;---------上传静态资源文件--------&quot;</span>));</span><br><span class="line">    gutil.log(<span class="string">&quot;----------**********-----------&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// gulp-ssh插件在上传文件数量过多时会报错，所以使用vinyl-ftp替代,效率更高</span></span><br><span class="line">    <span class="comment">// turn off buffering in gulp.src for best performance</span></span><br><span class="line">    <span class="keyword">return</span> gulp.src( path.join( resourceDir, <span class="string">&quot;**/*&quot;</span>), &#123; <span class="attr">buffer</span>: <span class="literal">false</span> &#125; )</span><br><span class="line">        .pipe( conn.dest(<span class="string">&#x27;/home/richmail/nginx/htdocs/html5&#x27;</span>) );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>对于 CSS 自定义构建，在 gulpfile.js 里面新加了 customBuildCss、customBuildAndDeployCss 两个 task。</p>
+<ul>
+<li><strong>HTML 自定义构建</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//-- renders.js --</span></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 自定义构建HTML</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description </span>gulp customBuildHtml --fileConf</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  $E(<span class="string">&#x27;btnBuildHTML&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oCheckeds = $E(<span class="string">&#x27;htmlBuildContainerContent&#x27;</span>).querySelectorAll(<span class="string">&#x27;input[type=&quot;checkbox&quot;]:checked&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;oCheckeds =&gt;&#x27;</span>, oCheckeds);</span><br><span class="line">    <span class="keyword">if</span> (!oCheckeds.length) &#123;</span><br><span class="line">      alert(<span class="string">&#x27;请选择要打包的 html 文件&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> fileConf = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = oCheckeds.length; i &lt; len; ++i) &#123;</span><br><span class="line">      fileConf.push(oCheckeds[i].value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;fileConf =&gt;&#x27;</span>, fileConf.join(<span class="string">&#x27;,&#x27;</span>));</span><br><span class="line">    executeBuild(&#123;</span><br><span class="line">      processingBarId: <span class="string">&#x27;btnBuildProgressHTML&#x27;</span>,</span><br><span class="line">      processingName: <span class="string">&#x27;HTML文件自定义构建&#x27;</span>,</span><br><span class="line">      command: <span class="string">&#x27;gulp&#x27;</span>,</span><br><span class="line">      args: [ <span class="string">&#x27;customBuildHtml&#x27;</span>, <span class="string">&#x27;--fileConf=&#x27;</span> + fileConf.join(<span class="string">&#x27;,&#x27;</span>) ]</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 自定义构建并自动部署HTML</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description </span>gulp customBuildAndDeployHtml --fileConf</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  $E(<span class="string">&#x27;btnBuildDeployHTML&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oCheckeds = $E(<span class="string">&#x27;htmlBuildContainerContent&#x27;</span>).querySelectorAll(<span class="string">&#x27;input[type=&quot;checkbox&quot;]:checked&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;oCheckeds =&gt;&#x27;</span>, oCheckeds);</span><br><span class="line">    <span class="keyword">if</span> (!oCheckeds.length) &#123;</span><br><span class="line">      alert(<span class="string">&#x27;请选择要打包的 html 文件&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> fileConf = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = oCheckeds.length; i &lt; len; ++i) &#123;</span><br><span class="line">      fileConf.push(oCheckeds[i].value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;fileConf =&gt;&#x27;</span>, fileConf.join(<span class="string">&#x27;,&#x27;</span>));</span><br><span class="line">    executeBuild(&#123;</span><br><span class="line">      processingBarId: <span class="string">&#x27;btnBuildProgressHTML&#x27;</span>,</span><br><span class="line">      processingName: <span class="string">&#x27;HTML文件自定义构建并自动部署&#x27;</span>,</span><br><span class="line">      command: <span class="string">&#x27;gulp&#x27;</span>,</span><br><span class="line">      args: [ <span class="string">&#x27;customBuildAndDeployHtml&#x27;</span>, <span class="string">&#x27;--fileConf=&#x27;</span> + fileConf.join(<span class="string">&#x27;,&#x27;</span>) ]</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//-- gulpfile.js --</span></span><br><span class="line">  <span class="comment">// 自定义构建 html</span></span><br><span class="line"><span class="comment">// 参考 task htmlminFiles</span></span><br><span class="line">gulp.task(<span class="string">&#x27;customBuildHtml&#x27;</span>, [ <span class="string">&#x27;clean&#x27;</span> ], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`yargv.fileConf =&gt; <span class="subst">$&#123;yargv.fileConf&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">var</span> fileConf = yargv.fileConf;</span><br><span class="line">    <span class="comment">// fileConf = fileConf.replace(/(\/mpost_operation\/)|(\/mpost_topic\/)|(\/mpost_v2\/)|(\/operation\/)|(\/umcupgrade\/)|(\/upPackage\/)|(\/weixin\/)/, &#x27;/**/&#x27;);</span></span><br><span class="line">    <span class="comment">// 因为 html 目录下还包含一些二级目录的 html 文件</span></span><br><span class="line">    fileConf = fileConf.replace(<span class="regexp">/\/html\/\w+\//g</span>, <span class="string">&#x27;/html/**/&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> gulp.src(fileConf.split(<span class="string">&#x27;,&#x27;</span>))</span><br><span class="line">        .pipe(debug(&#123;<span class="attr">title</span>: <span class="string">&#x27;htmlmin file --&gt; &#x27;</span>&#125;)) </span><br><span class="line">        .pipe(htmlmin())</span><br><span class="line">        .pipe(debug(&#123;<span class="attr">title</span>: <span class="string">&#x27;minify-inline file --&gt; &#x27;</span>&#125;))</span><br><span class="line">        .pipe(minifyInline())</span><br><span class="line">        .pipe(gulp.dest(resourceDir));            </span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 自定义构建 html</span></span><br><span class="line">gulp.task(<span class="string">&#x27;customBuildAndDeployHtml&#x27;</span>, [ <span class="string">&#x27;customBuildHtml&#x27;</span> ], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> conn = ftp.create( &#123;</span><br><span class="line">        host:     <span class="string">&#x27;此处是 host ip&#x27;</span>,</span><br><span class="line">        user:     <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">        password: <span class="string">&#x27;此处是密码&#x27;</span>,</span><br><span class="line">        parallel: <span class="number">10</span>,</span><br><span class="line">        log:      gutil.log</span><br><span class="line">        <span class="comment">// debug: gutil.log</span></span><br><span class="line">    &#125; );</span><br><span class="line"></span><br><span class="line">    gutil.log(<span class="string">&quot;----------**********-----------&quot;</span>);</span><br><span class="line">    gutil.log(gutil.colors.magenta(<span class="string">&quot;---------上传静态资源文件--------&quot;</span>));</span><br><span class="line">    gutil.log(<span class="string">&quot;----------**********-----------&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// gulp-ssh插件在上传文件数量过多时会报错，所以使用vinyl-ftp替代,效率更高</span></span><br><span class="line">    <span class="comment">// turn off buffering in gulp.src for best performance</span></span><br><span class="line">    <span class="keyword">return</span> gulp.src( path.join( resourceDir, <span class="string">&quot;**/*&quot;</span>), &#123; <span class="attr">buffer</span>: <span class="literal">false</span> &#125; )</span><br><span class="line">        .pipe( conn.dest(<span class="string">&#x27;/home/richmail/nginx/htdocs/html5&#x27;</span>) );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>对于 HTML 自定义构建，在 gulpfile.js 里面新加了 customBuildHtml、customBuildAndDeployHtml 两个 task。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><p>工具可以随意切换139邮箱代码当前工作目录，全网（release）、灰度（beta）、测试线（trunk），甚至可以手动输入分支（branch）目录； </p>
+</li>
+<li><p>工具执行任务是单线程，当前执行任务最多只有 1 个；即，如果当前正在构建时，点击其他按钮是无效的，应该等待当前任务执行完毕之后，才去点击执行其他任务。当然，你也可以右键终止当前任务；</p>
+</li>
+<li><p>由于工具是基于 Electron 的，所以包比较大，这个你懂的。</p>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li>Electron 官网：<a target="_blank" rel="noopener" href="http://electron.atom.io/">http://electron.atom.io/</a></li>
+<li>gulp 中文网：<a target="_blank" rel="noopener" href="http://www.gulpjs.com.cn/">http://www.gulpjs.com.cn/</a></li>
+<li>Q.js Github项目地址：<a target="_blank" rel="noopener" href="https://github.com/itorr/q.js">https://github.com/itorr/q.js</a></li>
+</ol>
+
+    </div>
+    <p class="eof">-- EOF --</p>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/blog/categories/Web%E6%8A%80%E6%9C%AF/">Web技术</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/blog/tags/gulp/" title="gulp">gulp</a> / 
+    
+        <a href="/blog/tags/Electron/" title="Electron">Electron</a> / 
+    
+        <a href="/blog/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" title="构建工具">构建工具</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/blog/posts/mongodb-for-mac/">
+            
+                Mac 下 MongoDB 及其客户端管理工具的安装和使用
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/blog/posts/github-tutorial/">
+            
+                Github 使用指南
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+  
+<script src="/blog/js/comment.js?v=1693362478913.js"></script>
+
+  <div id="comments" class="comment">
+    <!--
+    <div class="sign-bar">
+      GitHub 已登录!
+      <span class="sign-link">登出</span>
+    </div>
+    <section class="box">
+      <div class="com-avatar"><img src="/img/jelon.jpg" alt="avatar"></div>
+      <div class="com-text">
+        <div class="main">
+          <textarea class="text-area-edited show" placeholder="欢迎评论！"></textarea>
+          <div class="text-area-preview"></div>
+        </div>
+        <div class="switch">
+          <div class="switch-item on">编辑</div>
+          <div class="switch-item">预览</div>
+        </div>
+        <div class="button">提交</div>
+      </div>
+    </section>
+    <section class="tips">注：评论支持 markdown 语法！</section>
+    <section class="list-wrap">
+      <ul class="list">
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">张德龙</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like liked">已赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">333333</div>
+          </div>
+        </li>
+        <li>
+          <div class="user-avatar">
+            <a href="/">
+              <img src="/img/jelon.jpg" alt="user-avatar">
+            </a>
+          </div>
+          <div class="user-comment">
+            <div class="user-comment-header">
+              <span class="post-name">刘德华</span>
+              <span class="post-time">2017年12月12日</span>
+              <span class="like">点赞</span>
+              <span class="like-num">2</span>
+            </div>
+            <div class="user-comment-body">vvvvv</div>
+          </div>
+        </li>
+      </ul>
+      <div class="page-nav">
+        <a href="javascript: void(0);" class="item">1</a>
+        <a href="javascript: void(0);" class="item">2</a>
+        <a href="javascript: void(0);" class="item current">3</a>
+      </div>
+    </section>
+    -->
+  </div>
+  <script>
+  JELON.Comment({
+    container: 'comments',
+    label: '139mailbuildtool' || 'posts/139mailbuildtool/',
+    owner: 'jangdelong',
+    repo: 'blog_comments',
+    clientId: 'b08ed25e52c57993e69c',
+    clientSecret: '1cb9545488f0380904b87350e7c5a270ae03bab7'
+  });
+  </script>
+
+
+
+            </div>
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/blog/categories/Web%E6%8A%80%E6%9C%AF/">Web技术</a>
+        <span class="badge">(35)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E7%94%9F%E6%B4%BB%E7%90%90%E4%BA%8B/">生活琐事</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0/">算法练习</a>
+        <span class="badge">(31)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/blog/tags/%E7%AE%97%E6%B3%95/" title="算法">算法 (32)</a>
+  
+    <a class="tag-item" href="/blog/tags/LeetCode/" title="LeetCode">LeetCode (31)</a>
+  
+    <a class="tag-item" href="/blog/tags/Node-js/" title="Node.js">Node.js (5)</a>
+  
+    <a class="tag-item" href="/blog/tags/js/" title="js">js (4)</a>
+  
+    <a class="tag-item" href="/blog/tags/npm/" title="npm">npm (4)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF/" title="前端">前端 (3)</a>
+  
+    <a class="tag-item" href="/blog/tags/Hexo/" title="Hexo">Hexo (3)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/" title="静态博客">静态博客 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/" title="编码规范">编码规范 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/Mac-OSX/" title="Mac OSX">Mac OSX (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/Mac/" title="Mac">Mac (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/HTTPS/" title="HTTPS">HTTPS (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/css/" title="css">css (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/eslint/" title="eslint">eslint (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="文件上传">文件上传 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/content-type/" title="content-type">content-type (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/github-pages/" title="github pages">github pages (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Github/" title="Github">Github (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Git/" title="Git">Git (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/HTTP/" title="HTTP">HTTP (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E7%A0%81/" title="网络状态码">网络状态码 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%96%B0%E5%8D%9A%E5%AE%A2/" title="新博客">新博客 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/jQuery/" title="jQuery">jQuery (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E9%AB%98%E5%BA%A6/" title="浏览器高度">浏览器高度 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/js%E7%B1%BB%E5%9E%8B/" title="js类型">js类型 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/" title="隐式转换">隐式转换 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" title="命令大全">命令大全 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%BC%80%E6%9C%BA%E5%8F%98%E6%85%A2/" title="开机变慢">开机变慢 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Mongoose/" title="Mongoose">Mongoose (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/MongoDB/" title="MongoDB">MongoDB (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81/" title="开源许可证">开源许可证 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/node/" title="node">node (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/react/" title="react">react (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/react-native/" title="react-native">react-native (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/iOS/" title="iOS">iOS (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/MySQL/" title="MySQL">MySQL (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" title="小程序">小程序 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/WeChat/" title="WeChat">WeChat (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%B7%98%E5%AE%9Dnpm/" title="淘宝npm">淘宝npm (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://github.com/front-end-pigs/blog" target="_blank" title="Github博客">Github博客</a>
+        </li>
+    
+        <li>
+            <a href="https://github.com/jangdelong/blog_comments/issues" target="_blank" title="本站所有评论">本站所有评论</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2014-2023
+    
+
+    <a href="/blog/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="/blog/js/main.js?v=1693362479340.js"></script>
+
+
+</body>
+</html>
